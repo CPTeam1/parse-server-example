@@ -45,11 +45,10 @@ Parse.Cloud.define('pushEntryToFriends', function(request, response) {
   var params = request.params;
   var user = request.user;
 
-  var customData = params.customData;
+  var username = params.username;
   var launch = params.launch;
   var broadcast = params.broadcast;
 
-  var username = params.customData;
   var userQuery = new Parse.Query(Parse.User);
   userQuery.equalTo("username", username);
 
