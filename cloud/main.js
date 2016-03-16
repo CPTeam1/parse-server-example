@@ -83,8 +83,8 @@ Parse.Cloud.define('pushEntryToFriends', function(request, response) {
 
     var payload = {};
 
-    if (customData) {
-      payload.customdata = customData;
+    if (username) {
+      payload.username = username;
     }
     else if (launch) {
       payload.launch = launch;
