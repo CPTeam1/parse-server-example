@@ -46,6 +46,7 @@ Parse.Cloud.define('pushEntryToFriends', function(request, response) {
   var user = request.user;
 
   var username = params.username;
+  var entryid = params.entryid;
   var launch = params.launch;
   var broadcast = params.broadcast;
 
@@ -85,6 +86,7 @@ Parse.Cloud.define('pushEntryToFriends', function(request, response) {
 
     if (username) {
       payload.username = username;
+      payload.entryid = entryid;
     }
     else if (launch) {
       payload.launch = launch;
