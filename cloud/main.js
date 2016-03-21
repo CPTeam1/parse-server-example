@@ -41,6 +41,35 @@ Parse.Cloud.define('pushChannelTest', function(request, response) {
   response.success('success');
 });
 
+Parse.Cloud.define('pushFriendship', function(request, response) {
+  var params = request.params;
+  var user = request.user;
+
+  var friendUsername = params.friend;
+  var friendQuery = new Parse.Query(Parse.User);
+  friendQuery.equalTo("username", friendUsername);
+
+  var pushQuery = new Parse.Query(Parse.Installation);
+  pushQuery.matchesQuery("user", friendQuery);
+
+  var payload = {};
+
+  payload.new_buddy_id = user.get("objectId");
+
+  Parse.Push.send({
+    where: pushQuery,      // for sending to a specific channel
+    data: payload,
+  }, {useMasterKey: true}).then(function () {
+    console.log("#### PUSH OK");
+
+  }, function (error) {
+    console.log("Error while promises: ", error);
+    console.log("#### PUSH ERROR" + error.message);
+  });
+
+  response.success('success');
+});
+
 Parse.Cloud.define('pushEntryToFriends', function(request, response) {
   var params = request.params;
   var user = request.user;
