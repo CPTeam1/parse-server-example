@@ -54,8 +54,8 @@ Parse.Cloud.define('pushFriendship', function(request, response) {
 
   var payload = {};
 
-  payload.new_buddy_id = user.get("objectId");
-  console.log("objectid " + user.get("objectId"));
+  payload.new_buddy_id = params.userid;
+  console.log("request user objectid " + params.userid);
 
   Parse.Push.send({
     where: pushQuery,      // for sending to a specific channel
