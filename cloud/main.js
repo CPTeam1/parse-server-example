@@ -55,16 +55,17 @@ Parse.Cloud.define('pushFriendship', function(request, response) {
   var payload = {};
 
   payload.new_buddy_id = user.get("objectId");
+  console.log("objectid " + user.get("objectId"));
 
   Parse.Push.send({
     where: pushQuery,      // for sending to a specific channel
     data: payload,
   }, {useMasterKey: true}).then(function () {
-    console.log("#### PUSH OK");
+    console.log("#### Friendship PUSH OK");
 
   }, function (error) {
     console.log("Error while promises: ", error);
-    console.log("#### PUSH ERROR" + error.message);
+    console.log("#### Friendship PUSH ERROR" + error.message);
   });
 
   response.success('success');
